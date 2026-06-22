@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>竞彩网 · 知识库入口</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f2f4f7;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #1e2a3a;
+            line-height: 1.6;
+            padding: 2rem 1.2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            max-width: 1080px;
+            width: 100%;
+        }
+
+        /* 标题区 —— 目录感 header */
+        .site-header {
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #dce1e8;
+            padding-bottom: 1rem;
+        }
+
+        .site-header h1 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: #1f2b3c;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .site-header h1 small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #5f6c80;
+            margin-left: 0.4rem;
+            background: #e6eaef;
+            padding: 0.15rem 0.7rem;
+            border-radius: 20px;
+        }
+
+        .header-desc {
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+            color: #3f4b5c;
+            border-left: 3px solid #b0c0d0;
+            padding-left: 1rem;
+        }
+
+        /* 卡片网格 —— 目录式卡片 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin: 2.2rem 0;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1.6rem 1.4rem 1.8rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0,0,0,0.02);
+            border: 1px solid #e5e9f0;
+            transition: box-shadow 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07), 0 2px 6px rgba(0,0,0,0.03);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 0.6rem;
+            color: #1d2a38;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .card h3 i {
+            font-style: normal;
+            background: #dce3ed;
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: #2c3e58;
+        }
+
+        .card p, .card li {
+            font-size: 0.95rem;
+            color: #2d3b4d;
+            margin-bottom: 0.4rem;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0.2rem;
+        }
+
+        .card ul li::before {
+            content: "·";
+            color: #7b8ba0;
+            font-weight: bold;
+            display: inline-block;
+            width: 1rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #edf1f6;
+            padding: 0.2rem 0.8rem;
+            border-radius: 24px;
+            font-size: 0.8rem;
+            color: #2d4055;
+            margin-top: 0.5rem;
+            border: 1px solid #d8dee8;
+        }
+
+        /* 说明区 + 提示区 双列 */
+        .info-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 2rem 0 2.5rem;
+        }
+
+        .info-box {
+            flex: 1 1 280px;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1.6rem 1.5rem;
+            border: 1px solid #e4e9f0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+
+        .info-box h4 {
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            color: #1f2b3c;
+            border-bottom: 2px solid #eef2f7;
+            padding-bottom: 0.4rem;
+        }
+
+        .info-box p {
+            font-size: 0.95rem;
+            color: #2b3a4b;
+            margin-bottom: 0.7rem;
+        }
+
+        .info-box .example-link {
+            background: #f4f7fc;
+            padding: 0.6rem 1rem;
+            border-radius: 12px;
+            border-left: 3px solid #b3c4d8;
+            font-size: 0.9rem;
+            color: #1f3145;
+            margin: 0.8rem 0 0.2rem;
+        }
+
+        .highlight {
+            background: #fafbfd;
+            border-radius: 10px;
+            padding: 0.5rem 0.9rem;
+            border: 1px solid #e1e7ef;
+            color: #1a2c3f;
+            font-size: 0.9rem;
+        }
+
+        /* 相关信息区 (FAQ摘要 / 资源) */
+        .related-section {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1.6rem 1.8rem 2rem;
+            border: 1px solid #e2e7ef;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            margin: 2rem 0 1.8rem;
+        }
+
+        .related-section h4 {
+            font-weight: 500;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #1b2737;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .related-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem 2rem;
+        }
+
+        .related-items div {
+            flex: 1 1 200px;
+        }
+
+        .related-items p {
+            font-size: 0.9rem;
+            color: #304153;
+            margin-bottom: 0.2rem;
+        }
+
+        .related-items .q {
+            font-weight: 500;
+            color: #1c2b3d;
+        }
+
+        .divider-light {
+            height: 1px;
+            background: #e8ecf3;
+            margin: 1.8rem 0 1.5rem;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #58697c;
+            border-top: 1px solid #dce2eb;
+            padding-top: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .footer-note a {
+            color: #1d3b5c;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #bcc9db;
+        }
+
+        .inline-link {
+            color: #1e3b5c;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #b2c4da;
+            font-weight: 500;
+        }
+
+        .inline-link:hover {
+            background: #eaeef5;
+            text-decoration-color: #1e3b5c;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 680px) {
+            body { padding: 1.2rem 0.8rem; }
+            .site-header h1 { font-size: 1.7rem; flex-wrap: wrap; }
+            .card-grid { grid-template-columns: 1fr; }
+            .info-panel { flex-direction: column; }
+            .related-items { flex-direction: column; gap: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <!-- 目录感 header -->
+    <header class="site-header">
+        <h1>
+            ⚽ 知识库 · 竞彩
+            <small>稳定入口</small>
+        </h1>
+        <div class="header-desc">
+            从赛事资讯到投注参考，聚合常用入口与说明。面向日常浏览者，保持轻量、清晰。
+        </div>
+    </header>
+
+    <!-- 卡片目录区：特点、场景、资源 -->
+    <div class="card-grid">
+        <div class="card">
+            <h3><i>📋</i> 页面特点</h3>
+            <p>侧重信息归类，不做跳转聚合。每个卡片代表一类常见需求：</p>
+            <ul>
+                <li>赛事日历与结果查询</li>
+                <li>过关方式说明</li>
+                <li>奖金计算示例</li>
+                <li>客服与帮助通道</li>
+            </ul>
+            <span class="tag">知识卡片式</span>
+        </div>
+        <div class="card">
+            <h3><i>🧩</i> 使用场景</h3>
+            <p>日常查看赛事安排、了解游戏规则、核对开奖情况。适合在手机或电脑上快速浏览。</p>
+            <p style="margin-top: 0.6rem;">如果你需要直接访问核心服务，可以前往 <a href="https://portal-cn-sporttery.com" class="inline-link">竞彩网</a> 获取完整功能。</p>
+        </div>
+        <div class="card">
+            <h3><i>📎</i> 相关信息</h3>
+            <p>竞彩游戏根据体育赛事编排，每期开奖结果以官方发布为准。本页仅作介绍与索引。</p>
+            <p style="margin-top: 0.3rem;">🔎 常见术语：让球、胜平负、比分、总进球数、半全场。</p>
+        </div>
+    </div>
+
+    <!-- 说明区 + 提示区 并排 -->
+    <div class="info-panel">
+        <div class="info-box">
+            <h4>📖 说明区 · 稳定入口</h4>
+            <p>本页作为轻量知识入口，不替代官方页面。所有投注与查询请以实际页面为准。</p>
+            <p>你可以把当前页面当作一个目录索引，常用链接、规则简述、常见问题都整合在此。不需要每次都从头查找。</p>
+            <div class="example-link">
+                💡 举例：想了解「混合过关」规则，可先查阅下方FAQ摘要，或者直接访问 <a href="https://portal-cn-sporttery.com" class="inline-link">竞彩网</a> 的帮助中心。
+            </div>
+        </div>
+        <div class="info-box">
+            <h4>⚠️ 提示区 · 留意这些</h4>
+            <p>· 竞彩游戏基于体育赛事，开奖结果受比赛实际情况影响，请理性参与。</p>
+            <p>· 未成年人不得参与。购彩需年满18周岁，并注意个人情绪管理。</p>
+            <div class="highlight">
+                📌 如遇页面异常或链接变动，请直接访问 <a href="https://portal-cn-sporttery.com" class="inline-link">竞彩网</a> 获取最新入口。我们不做跳转中介，只做信息参考。
+            </div>
+        </div>
+    </div>
+
+    <!-- 相关信息区 —— FAQ摘要风格 -->
+    <div class="related-section">
+        <h4>📌 相关信息 · 常见要点</h4>
+        <div class="related-items">
+            <div>
+                <p class="q">Q：开奖结果在哪里查？</p>
+                <p>A：通常比赛结束后会在 <a href="https://portal-cn-sporttery.com" class="inline-link">竞彩网</a> 公布，同时也可查看历史场次。</p>
+            </div>
+            <div>
+                <p class="q">Q：过关方式有哪些？</p>
+                <p>A：包括单关、2串1、3串1、M串N等，不同玩法对应不同奖金计算。</p>
+            </div>
+            <div>
+                <p class="q">Q：让球数如何理解？</p>
+                <p>A：让球是平衡两队实力差异的方式，例如主队让1球，最终比分需减去让球数再看赛果。</p>
+            </div>
+            <div>
+                <p class="q">Q：投注截止时间是？</p>
+                <p>A：一般在该场比赛开赛前停止销售，具体以页面倒计时为准。</p>
+            </div>
+        </div>
+        <div style="margin-top: 1rem; font-size: 0.9rem; background: #f5f8fc; padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid #dfe6ef;">
+            🔗 更多详细规则可前往 <a href="https://portal-cn-sporttery.com" class="inline-link">竞彩网</a> 查阅官方说明。
+        </div>
+    </div>
+
+    <!-- 分隔 + 页脚 -->
+    <div class="divider-light"></div>
+    <footer class="footer-note">
+        <p>内容仅供参考 · 实际以 <a href="https://portal-cn-sporttery.com">竞彩网</a> 公布为准</p>
+        <p style="margin-top: 0.3rem; color: #6b7d92;">知识库入口版 · 页面结构随方向调整</p>
+    </footer>
+</div>
+</body>
+</html>
